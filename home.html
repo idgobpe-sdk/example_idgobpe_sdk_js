@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>ID Gob.pe</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12">
+            <h1 class="text-center">ID Gob.pe</h1>
+            <h4 class="text-center">Auth Result</h4>
+
+            <div class="col-sm-12">
+                <p><b>Tipo documento:</b> <span id="docType"></span></p>
+                <p><b>DNI:</b> <span id="doc"></span></p>
+                <p><b>Primer nombre:</b> <span id="firstName"></span></p>
+                <p><b>Sub:</b> <span id="sub"></span></p>
+            </div>
+        </div>
+
+        <div class="col-sm-12 text-center">
+            <button id="btn_logout" class="btn btn-danger">Salir</button>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://auth.id.gob.pe/idgobpe.js"></script>
+<script type="text/javascript">
+    var BASE_URL = 'http://localhost/example_idgobpe_sdk_js';
+    var jResponse = JSON.parse(localStorage.getItem('authResponse'));
+    var userinfo = jResponse.userInfo ? jResponse.userInfo : jResponse.idTokenParser;
+
+    $('#docType').text(userinfo.doc_type);
+    $('#doc').text(userinfo.doc);
+    $('#firstName').text(userinfo.first_name);
+    $('#sub').text(userinfo.sub);
+
+    IDGobPe.init({clientId: 'zS(*u>&WqERB):G8Mr4@>]B@Lq?{zjd-K`XVG)g'});
+
+    $('#btn_logout').click(function () {
+        IDGobPe.logout(BASE_URL);
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>ID Gob.pe</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12">
+            <h1 class="text-center">ID Gob.pe</h1>
+            <h4 class="text-center">JS Example Integration</h4>
+
+            <div class="col-sm-12 text-center">
+                <button id="btn_login" class="btn btn-success">Ingresar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://beta.id.gob.pe/idgobpe.js"></script>
+<script type="text/javascript">
+    var BASE_URL = 'http://localhost/example_idgobpe_sdk_js';
+
+    IDGobPe.init({
+        clientId: 'zS(*u>&WqERB):G8Mr4@>]B@Lq?{zjd-K`XVG)g',
+        responseTypes: [
+            IDGobPeConst.RESPONSE_TYPE_ID_TOKEN,
+            IDGobPeConst.RESPONSE_TYPE_TOKEN,
+        ],
+        scopes: [
+            IDGobPeConst.SCOPE_PROFILE
+        ]
+    });
+
+    IDGobPe.onCancel(function () {
+        console.log('cancel');
+    });
+
+    IDGobPe.onSuccess(function (response) {
+        localStorage.setItem('authResponse', JSON.stringify(response));
+        location.href = BASE_URL + '/home.html';
+    });
+
+    $('#btn_login').click(function () {
+        IDGobPe.auth();
+    });
+</script>
+</body>
+</html>
